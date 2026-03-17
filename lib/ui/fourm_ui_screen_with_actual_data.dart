@@ -88,28 +88,26 @@ class _FourmUiScreenActualState extends State<FourmUiScreenActual> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        ...userList
-            .map(
-              (user) => Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15)),
-                child: Row(
+        ...userList.map(
+          (user) => Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            child: Row(
+              children: [
+                _circularAvatar(user["ProfilePicture"], 18),
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _circularAvatar(user["ProfilePicture"], 18),
-                    const SizedBox(width: 12),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("${user["FirstName"]} ${user["LastName"]}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                        Text(user["Position"] ?? "", style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
-                      ],
-                    ),
+                    Text("${user["FirstName"]} ${user["LastName"]}", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                    Text(user["Position"] ?? "", style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
                   ],
                 ),
-              ),
-            )
-            .toList(),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -266,15 +264,15 @@ class _FourmUiScreenActualState extends State<FourmUiScreenActual> {
   }
 
   /// Helper for the super clean action buttons
-  Widget _minimalAction(IconData icon, String label, Color color, bool isCommtes) {
+  Widget _minimalAction(IconData icon, String label, Color color, bool isCommentes) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       child: Row(
         children: [
           Icon(icon, size: 18, color: color),
           if (label.isNotEmpty) ...[const SizedBox(width: 6), Text(label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13))],
-          if (showComments && isCommtes) Icon(Icons.keyboard_arrow_up_outlined, size: 18, color: color),
-          if (!showComments && isCommtes) Icon(Icons.keyboard_arrow_down_outlined, size: 18, color: color),
+          if (showComments && isCommentes) Icon(Icons.keyboard_arrow_up_outlined, size: 18, color: color),
+          if (!showComments && isCommentes) Icon(Icons.keyboard_arrow_down_outlined, size: 18, color: color),
         ],
       ),
     );
