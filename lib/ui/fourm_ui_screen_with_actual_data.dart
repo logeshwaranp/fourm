@@ -1,61 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fourm/model/model_reply.dart';
+import 'package:fourm/model/model_topic.dart';
 import 'package:fourm/response.dart';
 import 'package:fourm/ui/chat_input_box.dart';
-
-class ForumTopic {
-  final String subject;
-  final String description;
-  final String postedOn;
-  final String userName;
-  final String userPic;
-  final int likes;
-  final int dislikes;
-  final List<ForumReply> replies;
-  bool isExpanded;
-  final String call4ActionLabel;
-  final String call4ActionUrl;
-  final Map taggedUsers;
-
-  ForumTopic({required this.subject, required this.description, required this.postedOn, required this.isExpanded, required this.userName, required this.userPic, required this.likes, required this.dislikes, required this.replies, required this.call4ActionLabel, required this.call4ActionUrl, required this.taggedUsers});
-
-  factory ForumTopic.fromJson(Map<String, dynamic> json) {
-    return ForumTopic(subject: json["TopicSubject"], description: json["TopicDescription"], postedOn: json["PostedOn"], userName: json["TopicPostedUserName"], userPic: json["TopicPostedUserPic"], likes: json["TopicLikes"], dislikes: json["TopicDislikes"], replies: (json["TopicReplyList"] as List).map((e) => ForumReply.fromJson(e)).toList(), isExpanded: false, call4ActionLabel: json["Call4ActionLabel"], call4ActionUrl: json["Call4ActionUrl"], taggedUsers: json['TaggedUser']);
-  }
-}
-
-class ForumReply {
-  final String id;
-  final String description;
-  final String postedOn;
-  final String userName;
-  final String userPic;
-  final int likes;
-  final int dislikes;
-  final List<ForumSubReply> subReplies;
-  bool isExpanded;
-
-  ForumReply({required this.id, required this.description, required this.postedOn, required this.isExpanded, required this.userName, required this.userPic, required this.likes, required this.dislikes, required this.subReplies});
-
-  factory ForumReply.fromJson(Map<String, dynamic> json) {
-    return ForumReply(id: json["ReplyID"], description: json["ReplyDescription"], postedOn: json["ReplyPostedOn"], userName: json["ReplyPostedUserName"], userPic: json["ReplyPostedUserPic"], likes: json["ReplyLikes"], dislikes: json["ReplyDislikes"], subReplies: (json["Reply4ReplyList"] as List).map((e) => ForumSubReply.fromJson(e)).toList(), isExpanded: false);
-  }
-}
-
-class ForumSubReply {
-  final String id;
-  final String description;
-  final String postedOn;
-  final String userName;
-  final String userPic;
-  final int likes;
-  final int dislikes;
-
-  ForumSubReply({required this.id, required this.description, required this.postedOn, required this.userName, required this.userPic, required this.likes, required this.dislikes});
-
-  factory ForumSubReply.fromJson(Map<String, dynamic> json) {
-    return ForumSubReply(id: json["ReplyID"], description: json["ReplyDescription"], postedOn: json["ReplyPostedOn"], userName: json["ReplyPostedUserName"], userPic: json["ReplyPostedUserPic"], likes: json["ReplyLikes"], dislikes: json["ReplyDislikes"]);
-  }
-}
 
 class FourmUiScreenActual extends StatefulWidget {
   const FourmUiScreenActual({super.key});
@@ -443,7 +390,7 @@ class _CommentsSectionState extends State<CommentsSection> {
                       Text(userName, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 13)),
                       const Spacer(),
                       Text(postedOn, style: TextStyle(color: Colors.grey.shade500, fontSize: 11)),
-                      const Icon(Icons.more_horiz, size: 16, color: Colors.grey),
+                      const Icon(Icons.more_vert_outlined, size: 16, color: Colors.grey),
                     ],
                   ),
                   const SizedBox(height: 8),
